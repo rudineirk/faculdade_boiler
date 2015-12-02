@@ -1,5 +1,6 @@
-from boiler.conn import BoilerConn
 import time
+
+from .conn import BoilerConn
 
 
 def main():
