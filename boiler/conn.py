@@ -3,6 +3,7 @@
 from __future__ import print_function
 
 import socket
+from threading import Semaphore
 
 __all__ = [
     'BoilerConn',
@@ -18,12 +19,14 @@ CMD_WATER_FLUX = b"ani"
 
 
 class BoilerConn(object):
+
     def __init__(self, host="127.0.0.1", port=4545):
         self.host = host
         self.port = port
         self.sock = None
         self._heat_flux = 0.0
         self._water_flux = 0.0
+        self._lock = Semaphore()
         self.open()
 
     def open(self):
@@ -32,6 +35,12 @@ class BoilerConn(object):
     def close(self):
         self.sock.close()
 
+    def _lock(self):
+        self._lock.acquire()
+
+    def _unlock(self):
+        self._lock.release()
+
     def _send(self, msg):
         return self.sock.sendto(msg, (self.host, self.port))
 
@@ -39,15 +48,18 @@ class BoilerConn(object):
         return self.sock.recv(size)
 
     def _set_cmd(self, cmd, value):
-        # Transforma valor em bytes
+        self._lock()
         value = str(value).encode()
         self._send(cmd + value + b"\r\n")
         self._read()
+        self._unlock()
 
     def _get_msg(self, msg):
+        self._lock()
         self._send(msg)
         data = self._read()
-        # Transforma bytes em string
+        self._unlock()
+
         data = data.decode("utf-8")
         data = data[3:].replace(",", ".").strip()
         return float(data)
