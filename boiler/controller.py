@@ -25,7 +25,7 @@ class BaseController(object):
     def run(self):
         while True:
             value = self.get_sensor_value()
-            value = self.kc * (self.ref * value)
+            value = self.kc * (self.ref - value)
             self.set_actuator_value(value)
 
     def set_actuator_value(self, value):
