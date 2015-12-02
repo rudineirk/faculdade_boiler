@@ -1,3 +1,11 @@
+__all__ = [
+    'WaterColumnController',
+]
+
+KC_LEVEL = 1200.0
+HREF = 1.5
+
+
 class BaseController(object):
 
     def __init__(self, conn, queue, kc, ref):
@@ -16,3 +24,17 @@ class BaseController(object):
 
     def set_actuator_value(self, value):
         raise NotImplementedError
+
+
+class WaterColumnController(BaseController):
+
+    def __init__(self, conn, queue):
+        super(WaterColumnController, self).__init__(
+            conn,
+            queue,
+            KC_LEVEL,
+            HREF,
+        )
+
+    def set_actuator_value(self, value):
+        self.conn.water_flux = value
