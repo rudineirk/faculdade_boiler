@@ -18,7 +18,7 @@ class BaseReader(object):
     def run(self):
         while True:
             value = self.read_value()
-            self.queue.put(value)
+            self._queue.put(value)
             self.sleep()
 
     def read_value(self):
