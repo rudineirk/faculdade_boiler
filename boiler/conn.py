@@ -14,7 +14,7 @@ MSG_WATER_INSIDE_TEMP = b"st-0"
 MSG_WATER_IN_TEMP = b"sti0"
 MSG_WATER_OUT_TEMP = b"sno0"
 MSG_WATER_COLUMN = b"sh-0"
-CMD_HEAT_FLUX = b"aq"
+CMD_HEAT_FLUX = b"aq-"
 CMD_WATER_FLUX = b"ani"
 
 
