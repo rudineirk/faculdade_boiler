@@ -1,6 +1,11 @@
 from datetime import datetime
 from time import sleep
 
+__all__ = [
+    'WaterColumnReader',
+    'WaterTempReader',
+]
+
 
 class BaseReader(object):
 
