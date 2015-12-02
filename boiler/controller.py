@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 __all__ = [
     'WaterColumnController',
     'WaterTempController',
@@ -44,6 +46,7 @@ class WaterColumnController(BaseController):
 
     def set_actuator_value(self, value):
         self.conn.water_flux = value
+        print("Controller Water: {0}".format(value))
 
 
 class WaterTempController(BaseController):
@@ -58,3 +61,4 @@ class WaterTempController(BaseController):
 
     def set_actuator_value(self, value):
         self.conn.heat_flux = value
+        print("Controller Temp: {0}".format(value))

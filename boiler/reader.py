@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from datetime import datetime
 from time import sleep
 
@@ -39,10 +41,14 @@ class BaseReader(object):
 class WaterColumnReader(BaseReader):
 
     def read_value(self):
-        return self._conn.water_column
+        value = self._conn.water_column
+        print('Reader Water: {0}'.format(value))
+        return value
 
 
 class WaterTempReader(BaseReader):
 
     def read_value(self):
-        return self._conn.water_inside_temp
+        value = self._conn.water_inside_temp
+        print('Reader Temp: {0}'.format(value))
+        return value
