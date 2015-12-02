@@ -25,3 +25,9 @@ class BaseReader(object):
         time_diff = datetime.now() - self._last_loop
         sleep_time = self._loop_time - time_diff.total_seconds()
         sleep(sleep_time)
+
+
+class WaterColumnReader(BaseReader):
+
+    def read_value(self):
+        return self._conn.water_column
