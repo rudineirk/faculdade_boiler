@@ -4,6 +4,10 @@ from __future__ import print_function
 
 import socket
 
+__all__ = [
+    'BoilerConn',
+]
+
 MSG_AIR_TEMP = b"sta0"
 MSG_WATER_INSIDE_TEMP = b"st-0"
 MSG_WATER_IN_TEMP = b"sti0"
