@@ -26,7 +26,7 @@ class BoilerConn(object):
         self.sock = None
         self._heat_flux = 0.0
         self._water_flux = 0.0
-        self._lock = Semaphore()
+        self._semaphore = Semaphore()
         self.open()
 
     def open(self):
@@ -36,10 +36,10 @@ class BoilerConn(object):
         self.sock.close()
 
     def _lock(self):
-        self._lock.acquire()
+        self._semaphore.acquire()
 
     def _unlock(self):
-        self._lock.release()
+        self._semaphore.release()
 
     def _send(self, msg):
         return self.sock.sendto(msg, (self.host, self.port))
