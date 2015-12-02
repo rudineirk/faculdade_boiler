@@ -31,3 +31,9 @@ class WaterColumnReader(BaseReader):
 
     def read_value(self):
         return self._conn.water_column
+
+
+class WaterTempReader(BaseReader):
+
+    def read_value(self):
+        return self._conn.water_inside_temp
