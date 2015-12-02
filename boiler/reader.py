@@ -25,11 +25,14 @@ class BaseReader(object):
         raise NotImplementedError
 
     def sleep(self):
+        time_now = datetime.now()
         if self._last_loop is None:
-            self._last_loop = datetime.now()
-        time_diff = datetime.now() - self._last_loop
+            self._last_loop = time_now
+        time_diff = time_now - self._last_loop
         sleep_time = self._loop_time - time_diff.total_seconds()
-        self._last_loop = datetime.now()
+        if sleep_time <= 0:
+            sleep_time = self._loop_time
+        self._last_loop = time_now
         sleep(sleep_time)
 
 
