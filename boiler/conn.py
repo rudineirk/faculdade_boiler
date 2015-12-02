@@ -62,7 +62,13 @@ class BoilerConn(object):
 
         data = data.decode("utf-8")
         data = data[3:].replace(",", ".").strip()
-        return float(data)
+        try:
+            data = float(data)
+        except ValueError:
+            data = data.split('.')
+            new_data = ''.join(data[:-1]) + '.' + data[-1]
+            data = float(new_data)
+        return data
 
     @property
     def heat_flux(self):
