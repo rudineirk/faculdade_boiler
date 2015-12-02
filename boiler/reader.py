@@ -24,6 +24,7 @@ class BaseReader(object):
             self._last_loop = datetime.now()
         time_diff = datetime.now() - self._last_loop
         sleep_time = self._loop_time - time_diff.total_seconds()
+        self._last_loop = datetime.now()
         sleep(sleep_time)
 
 
