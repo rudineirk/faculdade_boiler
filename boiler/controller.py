@@ -23,9 +23,10 @@ class BaseController(object):
         return self.queue.get()
 
     def run(self):
-        value = self.get_sensor_value()
-        value = self.kc * (self.ref * value)
-        self.set_actuator(value)
+        while True:
+            value = self.get_sensor_value()
+            value = self.kc * (self.ref * value)
+            self.set_actuator(value)
 
     def set_actuator_value(self, value):
         raise NotImplementedError
