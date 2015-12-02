@@ -1,9 +1,14 @@
 __all__ = [
     'WaterColumnController',
+    'WaterTempController',
 ]
 
 KC_LEVEL = 1200.0
 HREF = 1.5
+
+WATER_CAPACITANCE = 50000000.0
+KC_TEMP = 0.15 * WATER_CAPACITANCE
+TREF = 50.0
 
 
 class BaseController(object):
@@ -38,3 +43,17 @@ class WaterColumnController(BaseController):
 
     def set_actuator_value(self, value):
         self.conn.water_flux = value
+
+
+class WaterTempController(BaseController):
+
+    def __init__(self, conn, queue):
+        super(WaterTempController, self).__init__(
+            conn,
+            queue,
+            KC_TEMP,
+            TREF,
+        )
+
+    def set_actuator_value(self, value):
+        self.conn.heat_flux = value
